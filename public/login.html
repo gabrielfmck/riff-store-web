@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!-- Autenticação: abas de login e cadastro com labels, campos e mensagens de validação. login.js envia os dados e define o destino após autenticar. -->
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <!-- O viewport faz os tamanhos responsivos acompanharem a largura real do dispositivo. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Entrar ou cadastrar | Riff Store</title>
+  <meta name="description" content="Acesse sua conta ou cadastre-se na Riff Store.">
+  <link rel="icon" href="img/site/favicon.svg" type="image/svg+xml">
+  <!-- A ordem das folhas preserva o Bootstrap como base e aplica style.css por último. -->
+  <link rel="stylesheet" href="css/fontes.css">
+  <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="vendor/bootstrap-icons/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-pagina="login">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <!-- app.js monta o cabeçalho comum, seus links e os indicadores de sessão/carrinho. -->
+  <header id="topo"></header>
+
+  <!-- main identifica o conteúdo principal e é o destino do link acessível de pular navegação. -->
+  <main id="conteudo" class="rs-auth">
+    <div class="rs-auth-arte" data-bg-foto="guitarrista-palco-2">
+      <div>
+        <span class="rs-kicker claro">Riff Store</span>
+        <blockquote class="mt-3"><span>Música.</span> <span>Estilo.</span> <span class="rs-auth-acento">Atitude.</span></blockquote>
+        <p class="rs-auth-descricao mt-3 mb-0">Com a sua conta você acompanha os pedidos, finaliza compras mais rápido e avalia os produtos que comprou.</p>
+      </div>
+    </div>
+
+    <div class="rs-auth-form">
+      <div class="rs-painel">
+        <ul class="nav nav-tabs mb-4" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="aba-login" data-bs-toggle="tab" data-bs-target="#painel-login" type="button" role="tab" aria-controls="painel-login" aria-selected="true">Login</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="aba-cadastro" data-bs-toggle="tab" data-bs-target="#painel-cadastro" type="button" role="tab" aria-controls="painel-cadastro" aria-selected="false">Cadastrar</button>
+          </li>
+        </ul>
+
+        <div class="tab-content">
+          <!-- Login -->
+          <div class="tab-pane fade show active" id="painel-login" role="tabpanel" aria-labelledby="aba-login" tabindex="0">
+            <h1 class="h2 mb-1">Bem-vindo de volta</h1>
+            <p class="text-secondary small mb-4">Entre com seu e-mail e senha.</p>
+  <!-- Labels associados aos IDs e feedbacks permitem identificar e corrigir cada campo. -->
+            <form id="form-login" novalidate>
+              <div class="mb-3">
+                <label for="login-email" class="form-label">E-mail</label>
+                <input type="email" class="form-control" id="login-email" name="email" autocomplete="email" required>
+                <div class="invalid-feedback"></div>
+              </div>
+              <div class="mb-2">
+                <label for="login-senha" class="form-label">Senha</label>
+                <div class="rs-senha">
+                  <input type="password" class="form-control" id="login-senha" name="senha" autocomplete="current-password" required>
+                  <button type="button" aria-label="Mostrar senha"><i class="bi bi-eye"></i></button>
+                </div>
+                <div class="invalid-feedback"></div>
+              </div>
+              <div class="text-end mb-4"><a href="recuperar-senha.html" class="small">Esqueceu sua senha?</a></div>
+              <div class="alert alert-danger small py-2" id="erro-login" role="alert" hidden></div>
+              <button type="submit" class="btn btn-rs w-100 btn-lg">Entrar</button>
+            </form>
+          </div>
+
+          <!-- Cadastro -->
+          <div class="tab-pane fade" id="painel-cadastro" role="tabpanel" aria-labelledby="aba-cadastro" tabindex="0">
+            <h1 class="h2 mb-1">Crie sua conta</h1>
+            <p class="text-secondary small mb-4">Leva menos de um minuto.</p>
+            <form id="form-cadastro" novalidate>
+              <!-- A grade agrupa campos relacionados; no celular, as colunas ficam uma abaixo da outra. -->
+              <div class="row g-3">
+                <div class="col-12">
+                  <label for="cad-nome" class="form-label">Nome completo</label>
+                  <input type="text" class="form-control" id="cad-nome" name="nome" autocomplete="name" required maxlength="120">
+                  <div class="invalid-feedback"></div>
+                </div>
+                <div class="col-sm-6">
+                  <label for="cad-email" class="form-label">E-mail</label>
+                  <input type="email" class="form-control" id="cad-email" name="email" autocomplete="email" required maxlength="160">
+                  <div class="invalid-feedback"></div>
+                </div>
+                <div class="col-sm-6">
+                  <label for="cad-telefone" class="form-label">Telefone <span class="text-secondary fw-normal">(opcional)</span></label>
+                  <input type="tel" class="form-control" id="cad-telefone" name="telefone" autocomplete="tel" placeholder="(34) 99999-9999" data-mascara="telefone">
+                  <div class="invalid-feedback"></div>
+                </div>
+                <div class="col-sm-6">
+                  <label for="cad-senha" class="form-label">Senha</label>
+                  <div class="rs-senha">
+                    <input type="password" class="form-control" id="cad-senha" name="senha" autocomplete="new-password" required minlength="6" aria-describedby="forca-texto">
+                    <button type="button" aria-label="Mostrar senha"><i class="bi bi-eye"></i></button>
+                  </div>
+                  <div class="invalid-feedback"></div>
+                  <div class="rs-forca"><div id="forca-barra"></div></div>
+                  <div class="form-text" id="forca-texto">Use pelo menos 6 caracteres.</div>
+                </div>
+                <div class="col-sm-6">
+                  <label for="cad-senha2" class="form-label">Confirme a senha</label>
+                  <input type="password" class="form-control" id="cad-senha2" name="senha2" autocomplete="new-password" required>
+                  <div class="invalid-feedback"></div>
+                </div>
+              </div>
+              <div class="alert alert-danger small py-2 mt-3" id="erro-cadastro" role="alert" hidden></div>
+              <button type="submit" class="btn btn-rs w-100 btn-lg mt-3">Cadastrar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- O rodapé é compartilhado e recebe os contatos e redes sociais das configurações. -->
+  <footer id="rodape"></footer>
+
+  <!-- Dependências primeiro, dados/API depois, app.js antes do controlador específico da página. -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <script src="js/compartilhado/fotos.js"></script>
+  <script src="js/demo/dados.js"></script>
+  <script src="js/demo/api-local.js"></script>
+  <script src="js/compartilhado/app.js"></script>
+  <script src="js/paginas/login.js"></script>
+</body>
+</html>
